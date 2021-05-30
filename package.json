@@ -27,6 +27,7 @@
 		"bluebird": "^3.7.2",
 		"bufferutil": "^4.0.3",
 		"electron": "^13.0.1",
-		"playwright": "^1.11.1"
+		"playwright": "^1.11.1",
+		"utf-8-validate": "^5.0.5"
 	}
 }
