@@ -1,7 +1,8 @@
 import { searchLarousse } from '$lib/larousse';
 import { searchLittré } from '$lib/littré';
 import { searchRobert } from '$lib/robert';
-import { Promise } from 'bluebird';
+import pkg from 'bluebird';
+const { Promise } = pkg;
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
