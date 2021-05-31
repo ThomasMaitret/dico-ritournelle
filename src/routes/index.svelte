@@ -61,7 +61,7 @@
 		display: flex;
 		justify-content: center;
 		height: 100vh;
-		font-size: 19px;
+		font-size: 18px;
 		box-sizing: border-box;
 		background: #667db6;
 		background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
@@ -113,7 +113,12 @@
 
 	@media (max-width: 1250px) {
 		.container {
-			width: 85vw;
+			width: 90vw;
+			padding: 1rem;
+		}
+		.response {
+			padding: 0.5rem 1.25rem;
+			font-size: 16px;
 		}
 	}
 
