@@ -1,22 +1,15 @@
-import { chromium } from 'playwright';
+import { fetchHTML } from './fetchHTML';
 
 export const searchLittré = async (word: string): Promise<SearchResult> => {
-	const browser = await chromium.launch();
-	const page = await browser.newPage();
-	await page.goto(`https://www.littre.org/definition/${word}`);
+	const $ = await fetchHTML(`https://www.littre.org/definition/${word}`);
 
-	const wordExists = await page.isVisible('.definition');
+	const wordExists = $('.definition');
 	if (!wordExists) {
-		await browser.close();
 		return Promise.reject('Not found');
 	}
 
-	const [catgram, definition] = await Promise.all([
-		await page.getAttribute('.entete b abbr', 'title'),
-		(await page.textContent('.corps li:first-child')) || ''
-	]);
-
-	await browser.close();
+	const catgram = ($('.entete b abbr').attr('title') || '').toString();
+	const definition = $('.corps li:first-child').text();
 
 	return { catgram, definition, source: 'Littré' };
 };

@@ -1,22 +1,15 @@
-import { chromium } from 'playwright';
+import { fetchHTML } from './fetchHTML';
 
 export const searchLarousse = async (word: string): Promise<SearchResult> => {
-	const browser = await chromium.launch();
-	const page = await browser.newPage();
-	await page.goto(`https://www.larousse.fr/dictionnaires/francais/${word}`);
+	const $ = await fetchHTML(`https://www.larousse.fr/dictionnaires/francais/${word}`);
 
-	const wordExists = await page.isVisible('.Definitions');
+	const wordExists = $('.Definitions');
 	if (!wordExists) {
-		await browser.close();
 		return Promise.reject('Not found');
 	}
 
-	const [catgram, definition] = await Promise.all([
-		await page.textContent('.CatgramDefinition'),
-		await page.textContent('.Definitions .DivisionDefinition:first-child')
-	]);
-
-	await browser.close();
+	const catgram = $('.CatgramDefinition').text();
+	const definition = $('.Definitions .DivisionDefinition:first-child').text();
 
 	return { catgram, definition, source: 'Larousse' };
 };
