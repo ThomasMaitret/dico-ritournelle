@@ -25,6 +25,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Ritournelle dico</title>
+</svelte:head>
+
 <div class="container">
 	<h1>Ritournelle dico 📔</h1>
 
