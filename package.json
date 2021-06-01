@@ -3,15 +3,16 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "svelte-kit dev",
+		"start": "npm run dev",
+		"dev": "svelte-kit --port 3001 dev",
 		"build": "svelte-kit build"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "next",
 		"@sveltejs/kit": "next",
 		"@types/bluebird": "^3.5.35",
-		"@typescript-eslint/eslint-plugin": "^4.25.0",
-		"@typescript-eslint/parser": "^4.25.0",
+		"@typescript-eslint/eslint-plugin": "^4.26.0",
+		"@typescript-eslint/parser": "^4.26.0",
 		"eslint": "^7.27.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^3.2.0",

@@ -41,9 +41,13 @@
 		<div class="response">
 			{#if !loading && searchResult}
 				{#if searchResult.definition}
-					<p class="text-capitalize">{searchResult.catgram}</p>
-					<p><b>Définition:</b> {searchResult.definition}</p>
-					<p><b>Source:</b> {searchResult.source}</p>
+					<div class="header">
+						{#if searchResult.catgram}
+							<div class="badge badge-catgram text-capitalize">{searchResult.catgram}</div>
+						{/if}
+						<div class="badge badge-source text-capitalize">{searchResult.source}</div>
+					</div>
+					<p class="definition">{@html searchResult.definition}</p>
 				{:else}
 					<p>Ce mot n'existe pas... coup dur</p>
 				{/if}
@@ -57,6 +61,11 @@
 </div>
 
 <style>
+	:root {
+		--border-radius: 3px;
+		--shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+	}
+
 	:global(body) {
 		margin: 0;
 		padding: 0;
@@ -65,24 +74,35 @@
 		display: flex;
 		justify-content: center;
 		height: 100vh;
-		font-size: 18px;
+		font-size: 17px;
 		box-sizing: border-box;
 		background: #667db6;
 		background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
 		color: white;
 	}
 
+	h1 {
+		margin-top: 0;
+	}
+
 	form {
 		display: flex;
+	}
+
+	:global(a) {
+		pointer-events: none !important;
+		cursor: text !important;
+		text-decoration: none;
+		color: #fff;
 	}
 
 	input {
 		border: none;
 		width: 100%;
 		padding: 5px 10px;
-		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+		box-shadow: var(--shadow);
 		line-height: 25px;
-		border-radius: 4px;
+		border-radius: var(--border-radius);
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
 	}
@@ -90,9 +110,9 @@
 	button {
 		padding: 10px;
 		border: none;
-		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+		box-shadow: var(--shadow);
 		border-left: 1px solid rgba(0, 0, 0, 0.4);
-		border-radius: 4px;
+		border-radius: var(--border-radius);
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
 		cursor: pointer;
@@ -100,14 +120,36 @@
 
 	.response {
 		background: #313a54;
-		padding: 1rem 2rem;
-		border-radius: 4px;
+		padding: 2rem;
+		border-radius: var(--border-radius);
 		margin-top: 1rem;
-		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+		box-shadow: var(--shadow);
 	}
 
 	.text-capitalize::first-letter {
 		text-transform: capitalize;
+	}
+
+	.response .header {
+		display: flex;
+		gap: 1.25rem;
+	}
+
+	.definition {
+		margin-top: 2rem;
+		line-height: 1.75rem;
+		max-height: 500px;
+		overflow-y: auto;
+	}
+
+	.badge {
+		background-color: #fff;
+		color: #313a54;
+		padding: 0.5rem 1rem;
+		border-radius: var(--border-radius);
+		width: fit-content;
+		font-size: 15px;
+		font-weight: 700;
 	}
 
 	.container {
@@ -121,8 +163,16 @@
 			padding: 1rem;
 		}
 		.response {
-			padding: 0.5rem 1.25rem;
+			padding: 1.25rem;
 			font-size: 16px;
+		}
+		.response .header {
+			display: flex;
+			flex-direction: column;
+		}
+		.response .header .badge {
+			width: auto;
+			text-align: center;
 		}
 	}
 

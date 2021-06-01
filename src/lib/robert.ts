@@ -8,8 +8,8 @@ export const searchRobert = async (word: string): Promise<SearchResult> => {
 		return Promise.reject('Not found');
 	}
 
-	const catgram = $('.d_cat').text();
-	const definition = $('.d_ptma').text();
+	const catgram = $('.d_cat:first').text();
+	const definition = $('.d_ptma').html();
 
 	return { catgram, definition, source: 'Robert' };
 };

@@ -8,8 +8,10 @@ export const searchLarousse = async (word: string): Promise<SearchResult> => {
 		return Promise.reject('Not found');
 	}
 
-	const catgram = $('.CatgramDefinition').text();
-	const definition = $('.Definitions .DivisionDefinition:first-child').text();
+	const catgramDef = $('.CatgramDefinition');
+	catgramDef.find('a').remove();
+	const catgram = catgramDef.text();
+	const definition = $('.Definitions .DivisionDefinition:first-child').html();
 
 	return { catgram, definition, source: 'Larousse' };
 };
