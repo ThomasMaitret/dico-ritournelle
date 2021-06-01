@@ -8,6 +8,8 @@ export const searchRobert = async (word: string): Promise<SearchResult> => {
 		return Promise.reject('Not found');
 	}
 
+	$('.d_sound_cont').remove();
+
 	const catgram = $('.d_cat:first').text();
 	const definition = $('.d_ptma').html();
 
