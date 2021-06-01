@@ -33,7 +33,7 @@
 	<h1>Ritournelle dico 📔</h1>
 
 	<form on:submit|preventDefault={handleSubmit}>
-		<input bind:value bind:this={input} placeholder="Entrer un mot..." />
+		<input bind:value bind:this={input} type="search" placeholder="Entrer un mot..." />
 		<button type="submit">🔍</button>
 	</form>
 
