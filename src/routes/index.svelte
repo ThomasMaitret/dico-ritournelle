@@ -119,7 +119,7 @@
 	}
 
 	.response {
-		background: #313a54;
+		background: #282e40;
 		padding: 2rem;
 		border-radius: var(--border-radius);
 		margin-top: 1rem;
@@ -143,13 +143,21 @@
 	}
 
 	.badge {
-		background-color: #fff;
-		color: #313a54;
 		padding: 0.5rem 1rem;
 		border-radius: var(--border-radius);
 		width: fit-content;
 		font-size: 15px;
 		font-weight: 700;
+	}
+
+	.badge-catgram {
+		background-color: #fff;
+		color: #313a54;
+	}
+
+	.badge-source {
+		background-color: #0b62bd;
+		color: #fff;
 	}
 
 	.container {
