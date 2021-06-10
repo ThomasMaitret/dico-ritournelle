@@ -2,9 +2,9 @@
 	import { onMount } from 'svelte';
 
 	let value: string;
-	let searchResult: SearchResult;
 	let loading = false;
 	let input: HTMLInputElement;
+	let searchResult: WordResponse;
 
 	onMount(function () {
 		input.focus();
@@ -45,7 +45,12 @@
 						{#if searchResult.catgram}
 							<div class="badge badge-catgram text-capitalize">{searchResult.catgram}</div>
 						{/if}
-						<div class="badge badge-source text-capitalize">{searchResult.source}</div>
+
+						{#each searchResult.sources as source}
+							<a href={source.url} target="_blank" rel="noopener" class="source-link">
+								<div class="badge badge-source text-capitalize">{source.name}</div>
+							</a>
+						{/each}
 					</div>
 					<p class="definition">{@html searchResult.definition}</p>
 				{:else}
@@ -89,7 +94,7 @@
 		display: flex;
 	}
 
-	:global(a) {
+	:global(a:not(.source-link)) {
 		pointer-events: none !important;
 		cursor: text !important;
 		text-decoration: none;
@@ -158,6 +163,14 @@
 	.badge-source {
 		background-color: #0b62bd;
 		color: #fff;
+	}
+
+	.badge-source:hover {
+		background-color: #1a76d8;
+	}
+
+	.source-link {
+		text-decoration: none;
 	}
 
 	.container {
