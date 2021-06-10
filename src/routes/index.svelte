@@ -41,11 +41,11 @@
 		<div class="response">
 			{#if !loading && searchResult}
 				{#if searchResult.definition}
-					<div class="header">
-						{#if searchResult.catgram}
-							<div class="badge badge-catgram text-capitalize">{searchResult.catgram}</div>
-						{/if}
+					{#if searchResult.catgram}
+						<div class="badge badge-catgram text-capitalize">{searchResult.catgram}</div>
+					{/if}
 
+					<div class="sources">
 						{#each searchResult.sources as source}
 							<a href={source.url} target="_blank" rel="noopener" class="source-link">
 								<div class="badge badge-source text-capitalize">{source.name}</div>
@@ -125,7 +125,7 @@
 
 	.response {
 		background: #282e40;
-		padding: 2rem;
+		padding: 1.5rem;
 		border-radius: var(--border-radius);
 		margin-top: 1rem;
 		box-shadow: var(--shadow);
@@ -135,27 +135,30 @@
 		text-transform: capitalize;
 	}
 
-	.response .header {
+	.response .sources {
 		display: flex;
-		gap: 1.25rem;
+		gap: 1rem;
+		margin-top: 1.25rem;
+		overflow-x: auto;
 	}
 
 	.definition {
-		margin-top: 2rem;
+		margin-top: 1.5rem;
 		line-height: 1.75rem;
 		max-height: 500px;
 		overflow-y: auto;
 	}
 
 	.badge {
-		padding: 0.5rem 1rem;
+		padding: 0.25rem 0.75rem;
 		border-radius: var(--border-radius);
 		width: fit-content;
-		font-size: 15px;
+		font-size: 14px;
 		font-weight: 700;
 	}
 
 	.badge-catgram {
+		display: block;
 		background-color: #fff;
 		color: #313a54;
 	}
@@ -186,14 +189,6 @@
 		.response {
 			padding: 1.25rem;
 			font-size: 16px;
-		}
-		.response .header {
-			display: flex;
-			flex-direction: column;
-		}
-		.response .header .badge {
-			width: auto;
-			text-align: center;
 		}
 	}
 

@@ -6,7 +6,7 @@ type SearchResult = {
 	source: Source;
 } | null;
 
-type Source = { name: 'larousse' | 'robert' | 'littré' | null; url: string };
+type Source = { name: 'larousse' | 'robert' | 'littré' | 'CNRTL' | null; url: string };
 
 type WordResponse = {
 	catgram: string | null;

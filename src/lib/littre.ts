@@ -1,7 +1,8 @@
 import { fetchHTML } from './fetchHTML';
 
 export const searchLittré = async (word: string): Promise<SearchResult> => {
-	const $ = await fetchHTML(`https://www.littre.org/definition/${word}`);
+	const url = `https://www.littre.org/definition/${word}`;
+	const $ = await fetchHTML(url);
 
 	if (!$) {
 		return null;
@@ -21,6 +22,6 @@ export const searchLittré = async (word: string): Promise<SearchResult> => {
 	return {
 		catgram,
 		definition,
-		source: { name: 'littré', url: `https://www.littre.org/definition/${word}` }
+		source: { name: 'littré', url }
 	};
 };

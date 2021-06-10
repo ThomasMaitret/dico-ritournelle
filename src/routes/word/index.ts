@@ -1,3 +1,4 @@
+import { searchCnrtl } from '$lib/cnrtl';
 import { searchLarousse } from '$lib/larousse';
 import { searchLittré } from '$lib/littre';
 import { searchRobert } from '$lib/robert';
@@ -29,7 +30,8 @@ const searchWord = async (word: string): Promise<WordResponse> => {
 	const responses = await Promise.all([
 		searchLarousse(word),
 		searchRobert(word),
-		searchLittré(word)
+		searchLittré(word),
+		searchCnrtl(word)
 	]);
 	const definition =
 		responses[0]?.definition || responses[1]?.definition || responses[1]?.definition || null;

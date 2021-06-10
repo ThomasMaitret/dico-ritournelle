@@ -1,7 +1,8 @@
 import { fetchHTML } from './fetchHTML';
 
 export const searchLarousse = async (word: string): Promise<SearchResult> => {
-	const $ = await fetchHTML(`https://www.larousse.fr/dictionnaires/francais/${word}`);
+	const url = `https://www.larousse.fr/dictionnaires/francais/${word}`;
+	const $ = await fetchHTML(url);
 
 	if (!$) {
 		return null;
@@ -20,6 +21,6 @@ export const searchLarousse = async (word: string): Promise<SearchResult> => {
 	return {
 		catgram,
 		definition,
-		source: { name: 'larousse', url: `https://www.larousse.fr/dictionnaires/francais/${word}` }
+		source: { name: 'larousse', url }
 	};
 };

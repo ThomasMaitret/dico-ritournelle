@@ -1,7 +1,8 @@
 import { fetchHTML } from './fetchHTML';
 
 export const searchRobert = async (word: string): Promise<SearchResult> => {
-	const $ = await fetchHTML(`https://dictionnaire.lerobert.com/definition/${word}`);
+	const url = `https://dictionnaire.lerobert.com/definition/${word}`;
+	const $ = await fetchHTML(url);
 
 	if (!$) {
 		return null;
@@ -20,6 +21,6 @@ export const searchRobert = async (word: string): Promise<SearchResult> => {
 	return {
 		catgram,
 		definition,
-		source: { name: 'robert', url: `https://dictionnaire.lerobert.com/definition/${word}` }
+		source: { name: 'robert', url }
 	};
 };
