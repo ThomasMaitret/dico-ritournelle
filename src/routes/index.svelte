@@ -52,6 +52,11 @@
 							</a>
 						{/each}
 					</div>
+
+					{#if searchResult.boutade}
+						<p class="boutade">"{searchResult.boutade}"</p>
+					{/if}
+
 					<p class="definition">{@html searchResult.definition}</p>
 				{:else}
 					<p>Ce mot n'existe pas... coup dur</p>
@@ -147,6 +152,11 @@
 		line-height: 1.75rem;
 		max-height: 500px;
 		overflow-y: auto;
+	}
+
+	.boutade {
+		color: #fff79c;
+		font-weight: 500;
 	}
 
 	.badge {

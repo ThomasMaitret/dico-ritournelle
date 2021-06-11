@@ -12,4 +12,5 @@ type WordResponse = {
 	catgram: string | null;
 	definition: string | null;
 	sources: Source[];
+	boutade: string | null;
 };

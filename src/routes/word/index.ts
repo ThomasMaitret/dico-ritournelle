@@ -2,6 +2,7 @@ import { searchCnrtl } from '$lib/cnrtl';
 import { searchLarousse } from '$lib/larousse';
 import { searchLittré } from '$lib/littre';
 import { searchRobert } from '$lib/robert';
+import { boutades } from '$lib/boutades';
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
@@ -54,6 +55,7 @@ const searchWord = async (word: string): Promise<WordResponse> => {
 	}
 
 	return {
+		boutade: boutades[word],
 		definition,
 		catgram,
 		sources
