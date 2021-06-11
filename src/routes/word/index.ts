@@ -28,14 +28,23 @@ export async function get({
 
 const searchWord = async (word: string): Promise<WordResponse> => {
 	const responses = await Promise.all([
-		searchLarousse(word),
 		searchRobert(word),
 		searchLittré(word),
+		searchLarousse(word),
 		searchCnrtl(word)
 	]);
 	const definition =
-		responses[0]?.definition || responses[1]?.definition || responses[1]?.definition || null;
-	const catgram = responses[0]?.catgram || responses[1]?.catgram || responses[1]?.catgram || null;
+		responses[0]?.definition ||
+		responses[1]?.definition ||
+		responses[2]?.definition ||
+		responses[3]?.definition ||
+		null;
+	const catgram =
+		responses[0]?.catgram ||
+		responses[1]?.catgram ||
+		responses[2]?.catgram ||
+		responses[3]?.catgram ||
+		null;
 
 	const sources = [];
 	for (const response of responses) {
