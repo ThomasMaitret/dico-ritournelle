@@ -14,8 +14,7 @@
 		if (value.trim()) {
 			loading = true;
 
-			const parsed = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-			const url = `/word?word=${parsed}`;
+			const url = `/word?word=${value}`;
 			const res = await fetch(url);
 			const { response } = await res.json();
 			searchResult = response;

@@ -14,8 +14,9 @@ export async function get({
 }): Promise<{ body: { response: WordResponse } } | undefined> {
 	const word = query.get('word');
 
-	if (word) {
-		const response = await searchWord(word);
+	if (word && typeof word === 'string') {
+		const parsed = encodeURI(word.trim().toLowerCase());
+		const response = await searchWord(parsed);
 
 		if (response) {
 			return {
