@@ -16,7 +16,7 @@ export const searchCnrtl = async (word: string): Promise<SearchResult> => {
 	const catgramDef = $('#vitemselected:first-child a');
 	catgramDef.find('span').remove();
 	const catgram = catgramDef.text().replace(', ', '');
-	const definition = $('.tlf_cdefinition:first-child').html();
+	const definition = $('.tlf_cdefinition:first-child').html() || $('.tlf_cdefinition').html();
 
 	return {
 		catgram,
