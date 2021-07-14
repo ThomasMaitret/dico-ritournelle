@@ -3,6 +3,11 @@ import { searchLarousse } from '$lib/larousse';
 import { searchLittré } from '$lib/littre';
 import { searchRobert } from '$lib/robert';
 import { boutades } from '$lib/boutades';
+// import { searchAcademie } from '$lib/academie';
+
+const isDev = process.env.NODE_ENV === 'development';
+
+const cache = new Map();
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
@@ -16,9 +21,25 @@ export async function get({
 
 	if (word && typeof word === 'string') {
 		const parsed = encodeURI(word.trim().toLowerCase());
+
+		if (!isDev) {
+			const cachedValue = cache.get(parsed);
+			if (cachedValue) {
+				return {
+					body: {
+						response: cachedValue
+					}
+				};
+			}
+		}
+
 		const response = await searchWord(parsed);
 
 		if (response) {
+			if (!isDev) {
+				cache.set(parsed, response);
+			}
+
 			return {
 				body: {
 					response
@@ -34,6 +55,7 @@ const searchWord = async (word: string): Promise<WordResponse> => {
 		searchLittré(word),
 		searchLarousse(word),
 		searchCnrtl(word)
+		// searchAcademie(word)
 	]);
 	const definition =
 		responses[0]?.definition ||

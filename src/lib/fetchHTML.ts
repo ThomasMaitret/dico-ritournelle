@@ -1,10 +1,10 @@
-import axios from 'axios';
+import phin from 'phin';
 import cheerio, { CheerioAPI } from 'cheerio';
 
 export async function fetchHTML(url: string): Promise<CheerioAPI | null> {
 	try {
-		const { data } = await axios.get(url, { timeout: 5000 });
-		return cheerio.load(data);
+		const { body } = await phin(url);
+		return cheerio.load(body);
 	} catch (error) {
 		return null;
 	}
