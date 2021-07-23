@@ -170,6 +170,7 @@
 		display: block;
 		background-color: #fff;
 		color: #313a54;
+		width: max-content;
 	}
 
 	.badge-source {
