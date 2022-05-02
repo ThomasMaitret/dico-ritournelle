@@ -1,7 +1,7 @@
 import { searchCnrtl } from '$lib/cnrtl';
 import { searchLarousse } from '$lib/larousse';
 import { searchLittré } from '$lib/littre';
-import { searchRobert } from '$lib/robert';
+// import { searchRobert } from '$lib/robert';
 import { boutades } from '$lib/boutades';
 // import { searchAcademie } from '$lib/academie';
 
@@ -51,7 +51,7 @@ export async function get({
 
 const searchWord = async (word: string): Promise<WordResponse> => {
 	const responses = await Promise.all([
-		searchRobert(word),
+		// searchRobert(word),
 		searchLittré(word),
 		searchLarousse(word),
 		searchCnrtl(word)
@@ -61,13 +61,13 @@ const searchWord = async (word: string): Promise<WordResponse> => {
 		responses[0]?.definition ||
 		responses[1]?.definition ||
 		responses[2]?.definition ||
-		responses[3]?.definition ||
+		// responses[3]?.definition ||
 		null;
 	const catgram =
 		responses[0]?.catgram ||
 		responses[1]?.catgram ||
 		responses[2]?.catgram ||
-		responses[3]?.catgram ||
+		// responses[3]?.catgram ||
 		null;
 
 	const sources = [];
