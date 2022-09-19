@@ -8,22 +8,22 @@
 		"build": "svelte-kit build"
 	},
 	"dependencies": {
-		"cheerio": "^1.0.0-rc.10",
+		"cheerio": "^1.0.0-rc.12",
 		"phin": "^3.6.1"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "next",
 		"@sveltejs/kit": "next",
-		"@typescript-eslint/eslint-plugin": "^5.21.0",
-		"@typescript-eslint/parser": "^5.21.0",
-		"eslint": "^8.14.0",
+		"@typescript-eslint/eslint-plugin": "^5.37.0",
+		"@typescript-eslint/parser": "^5.37.0",
+		"eslint": "^8.23.1",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte3": "^3.4.1",
-		"prettier": "^2.6.2",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"prettier": "^2.7.1",
 		"prettier-plugin-svelte": "^2.7.0",
-		"svelte": "^3.48.0",
-		"svelte-preprocess": "^4.10.6",
+		"svelte": "^3.50.1",
+		"svelte-preprocess": "^4.10.7",
 		"tslib": "^2.4.0",
-		"typescript": "^4.6.4"
+		"typescript": "^4.8.3"
 	}
 }
