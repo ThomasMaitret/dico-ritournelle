@@ -30,4 +30,14 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          cheerio: ["cheerio"],
+        },
+      },
+    },
+  },
 });
