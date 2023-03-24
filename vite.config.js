@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import { splitVendorChunkPlugin } from "vite";
 
 export default defineConfig({
   server: {
@@ -30,14 +31,5 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          cheerio: ["cheerio"],
-        },
-      },
-    },
-  },
+  plugins: [splitVendorChunkPlugin()],
 });
