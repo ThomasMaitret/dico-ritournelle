@@ -1,7 +1,8 @@
 import { loadHtml } from "./loadHtml";
 
 export const searchAcademie = async (word: string): Promise<SearchResult> => {
-  const url = `/academie/${word}`;
+  const prodUrl = `https://academie.atilf.fr/9/consulter/${word}`;
+  const url = import.meta.env.PROD ? prodUrl : `/robert/${word}`;
   const $ = await loadHtml(url);
 
   if (!$) {
@@ -18,7 +19,7 @@ export const searchAcademie = async (word: string): Promise<SearchResult> => {
     definition: "",
     source: {
       name: "academie",
-      url: `https://academie.atilf.fr/9/consulter/${word}`,
+      url: prodUrl,
     },
   };
 };

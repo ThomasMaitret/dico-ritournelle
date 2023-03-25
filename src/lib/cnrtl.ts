@@ -1,7 +1,8 @@
 import { loadHtml } from "./loadHtml";
 
 export const searchCnrtl = async (word: string): Promise<SearchResult> => {
-  const url = `/cnrtl/${word}`;
+  const prodUrl = `https://www.cnrtl.fr/definition/${word}`;
+  const url = import.meta.env.PROD ? prodUrl : `/robert/${word}`;
   const $ = await loadHtml(url);
 
   if (!$) {
@@ -24,7 +25,7 @@ export const searchCnrtl = async (word: string): Promise<SearchResult> => {
     definition,
     source: {
       name: "CNRTL",
-      url: `https://www.cnrtl.fr/definition/${word}`,
+      url: prodUrl,
     },
   };
 };

@@ -1,7 +1,8 @@
 import { loadHtml } from "./loadHtml";
 
 export const searchRobert = async (word: string): Promise<SearchResult> => {
-  const url = `/robert/${word}`;
+  const prodUrl = `https://dictionnaire.lerobert.com/definition/${word}`;
+  const url = import.meta.env.PROD ? prodUrl : `/robert/${word}`;
   const $ = await loadHtml(url);
   if (!$) return null;
 
@@ -18,7 +19,7 @@ export const searchRobert = async (word: string): Promise<SearchResult> => {
     definition,
     source: {
       name: "robert",
-      url: `https://dictionnaire.lerobert.com/definition/${word}`,
+      url: prodUrl,
     },
   };
 };

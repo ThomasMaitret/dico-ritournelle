@@ -1,7 +1,8 @@
 import { loadHtml } from "./loadHtml";
 
 export const searchLarousse = async (word: string): Promise<SearchResult> => {
-  const url = `/larousse/${word}`;
+  const prodUrl = `https://www.larousse.fr/dictionnaires/francais/${word}`;
+  const url = import.meta.env.PROD ? prodUrl : `/robert/${word}`;
   const $ = await loadHtml(url);
 
   if (!$) {
@@ -23,7 +24,7 @@ export const searchLarousse = async (word: string): Promise<SearchResult> => {
     definition,
     source: {
       name: "larousse",
-      url: `https://www.larousse.fr/dictionnaires/francais/${word}`,
+      url: prodUrl,
     },
   };
 };
