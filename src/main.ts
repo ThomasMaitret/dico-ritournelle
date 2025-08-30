@@ -86,6 +86,6 @@ async function getSources(word: string): Promise<string[]> {
   return response?.map((r) => r?.source.url || "");
 }
 
-function strNoAccent(a) {
+function strNoAccent(a: string) {
   return a.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
