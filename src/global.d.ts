@@ -1,8 +1,6 @@
 /// <reference types="@sveltejs/kit" />
 
 type SearchResult = {
-  catgram: string | null;
-  definition: string | null;
   source: Source;
 } | null;
 
@@ -12,8 +10,5 @@ type Source = {
 };
 
 type WordResponse = {
-  catgram: string;
-  definition: string;
   source: Source;
-  boutade: string;
 };

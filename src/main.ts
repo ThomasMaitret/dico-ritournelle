@@ -1,20 +1,16 @@
 import "./style.css";
 
-import { boutades } from "./lib/boutades";
 import { searchCnrtl } from "./lib/cnrtl";
 import { searchLarousse } from "./lib/larousse";
 import { searchLittré } from "./lib/littre";
 import { searchRobert } from "./lib/robert";
-// import { searchAcademie } from "./lib/academie";
-
-const cache = new Map();
+import { searchAcademie } from "./lib/academie";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 <div class="container">
-  <h1>Ritournelle dico 📔</h1>
     <form action="" id="searchForm">
       <input autofocus type="search" id="word" placeholder="Entrer un mot..." />
-      <button>🔍</button>
+      <button>Chercher</button>
     </form>
 
     <p id="definition" style="display: grid;"></p>
@@ -30,46 +26,66 @@ searchForm.addEventListener("submit", async (e) => {
 async function main() {
   const definitionDiv = document.querySelector("#definition")!;
   definitionDiv.classList.value = "response";
-  definitionDiv.innerHTML = "Loading...";
+  definitionDiv.innerHTML = "<span class='loader'></span>";
 
   const wordInput = document.querySelector("#word") as HTMLInputElement;
-  const word = wordInput.value;
+  const word = strNoAccent(wordInput.value);
   if (!word) return;
 
   const definition = await getDefinition(word);
-  definitionDiv.innerHTML = `${definition}`;
+  definitionDiv.innerHTML = definition
+    ? `<a href="${definition}" target="_blank" rel="noopener">${definition}</a>
+    <span class="loader"></span>`
+    : "Pas de définition trouvée";
+
+  if (definition) {
+    const sources = await getSources(word);
+    definitionDiv.innerHTML = sources
+      .map(
+        (source) =>
+          `<a href="${source}" target="_blank" rel="noopener">${source}</a>`
+      )
+      .join("\n");
+  }
 
   return;
 }
 
 async function getDefinition(word: string) {
   const parsed = encodeURI(word.trim().toLowerCase());
-  const cachedValue = cache.get(parsed) as WordResponse;
-  if (cachedValue) {
-    return cachedValue.definition;
-  }
 
   const response = await searchWord(parsed);
-  if (!response || !response.definition) return "Pas de définition trouvée 😞";
+  if (!response || !response.source.url) return;
 
-  cache.set(parsed, response);
-
-  return response.definition;
+  return response.source.url;
 }
 
 async function searchWord(word: string): Promise<WordResponse> {
-  const response = await Promise.any([
+  const response = await Promise.race([
+    searchCnrtl(word),
     searchRobert(word),
     searchLittré(word),
     searchLarousse(word),
-    searchCnrtl(word),
-    // searchAcademie(word),
+    searchAcademie(word),
   ]);
 
   return {
-    boutade: boutades[word],
-    definition: response?.definition || "",
-    catgram: response?.catgram || "",
     source: response?.source || { name: null, url: "" },
   };
+}
+
+async function getSources(word: string): Promise<string[]> {
+  const response = await Promise.all([
+    searchCnrtl(word),
+    searchRobert(word),
+    searchLittré(word),
+    searchLarousse(word),
+    searchAcademie(word),
+  ]);
+
+  return response?.map((r) => r?.source.url || "");
+}
+
+function strNoAccent(a) {
+  return a.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }

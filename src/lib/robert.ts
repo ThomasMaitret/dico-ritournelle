@@ -11,12 +11,7 @@ export const searchRobert = async (word: string): Promise<SearchResult> => {
 
   $(".d_sound_cont").remove();
 
-  const catgram = $(".d_cat:first").text();
-  const definition = $(".d_ptma").html();
-
   return {
-    catgram,
-    definition,
     source: {
       name: "robert",
       url: prodUrl,

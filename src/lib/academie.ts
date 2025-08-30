@@ -15,8 +15,6 @@ export const searchAcademie = async (word: string): Promise<SearchResult> => {
   }
 
   return {
-    catgram: "",
-    definition: "",
     source: {
       name: "academie",
       url: prodUrl,
